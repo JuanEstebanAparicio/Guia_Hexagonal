@@ -1,0 +1,14 @@
+<?php
+
+class InvalidUserNameException extends InvalidArgumentException
+{
+    public static function becauseValueIsEmpty()
+    {
+        return new self('El nombre de usuario no puede estar vacío.');
+    }
+
+    public static function becauseValueIsTooShort($min)
+    {
+        return new self('El nombre del usuario debe tener al menos ' . $min . ' caracteres.');
+    }
+}
