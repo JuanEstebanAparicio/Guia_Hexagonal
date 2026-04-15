@@ -1,0 +1,24 @@
+El dominio define y protege las reglas del negocio, sin depender de tecnología.
+
+Puerto de salida una interfaz que define lo que el sistema necesita del exterior
+
+Use Case:
+
+    Crear usuario
+    Validar reglas
+    Coordinar proceso
+
+Controller:
+
+    HTTP → Command
+    Model → Response
+
+Concepto	    Qué es realmente
+
+Dominio	        Reglas del negocio puras
+
+Puerto salida	Interfaz → lo que necesito afuera
+
+Use Case	    Ejecuta la lógica
+
+Controller	    Traductor (web ↔ aplicación)

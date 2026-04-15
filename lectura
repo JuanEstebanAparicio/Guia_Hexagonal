@@ -1,0 +1,120 @@
+Ariquitectura hexagonal:
+
+Dominio -> Casos de uso -> Puertos -> Adaptadores -> IU
+
+[ UI / Web ]
+[ Entrypoints ]
+[ Infrastructure ]
+[ Application ]
+[ Domain ]  ← núcleo
+
+
+1. Dominio
+2. Puertos de salida
+3. Puertos de entrada
+4. Application
+5. Infraestructura
+6. Entrypoints
+7. Presentación
+
+Contiene:
+
+Modelos (UserModel)
+Value Object (Email, Password...)
+Reglas
+Excepciones
+
+Un objeto NO puede existir en estado inválido
+
+Ejemplo:
+
+Email inválido → NO se crea objeto
+Password débil → NO se crea objeto
+
+Puertos de salida: Son interfaces -> lo que el usuario necesita afuera
+
+
+Guardar usuario
+Buscar usuario
+Eliminar usuario
+
+importante:
+Son interfaces, NO saben de MySQL
+
+Ejemplo: SaveUserPort, GetUserByIdPort
+
+
+6. PUERTOS DE ENTRADA (USE CASES)
+
+Crear usuario
+Login
+Actualizar usuario
+
+Reciben:
+
+    Command / Query
+
+Retornan:
+
+    Modelos de dominio
+
+7. APPLICATION (DONDE PASA TODO)
+
+Ejemplo: CreateUserService
+
+Responsabilidades:
+
+Validar existencia
+Crear modelo
+Hashear password
+Guardar
+
+Importante:
+
+Usa puertos (interfaces)
+NO usa DB directa
+
+8. INFRAESTRUCTURA
+
+👉 Aquí ya aparece la tecnología
+
+Ejemplo:
+
+MySQL
+APIs
+
+Ejemplo clave:
+
+    UserRepositoryMySQL implements SaveUserPort
+
+Dominio → Model
+Infra → SQL
+
+9. ENTRYPOINTS (FRONTERA)
+
+    HTTP → index.php → Controller → UseCase → Response
+
+
+10. PRESENTACIÓN
+
+    Solo HTML
+
+        Sin lógica
+        Solo muestra datos
+
+11. FLUJO COMPLETO (RESUMEN REAL)
+
+Ejemplo crear usuario:
+HTML form
+    → index.php
+    → CreateUserCommand
+    → CreateUserService
+    → SaveUserPort
+    → MySQL
+
+12. SEGURIDAD (IMPORTANTE)
+
+    Password → bcrypt
+    Login → mismo error siempre (anti-hacking)
+    PDO → evita SQL Injection
+htmlspecialchars → evita XSS
