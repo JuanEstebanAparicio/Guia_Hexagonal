@@ -1,22 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/../ValueObjects/UserId.php';
 require_once __DIR__ . '/../ValueObjects/UserName.php';
 require_once __DIR__ . '/../ValueObjects/UserEmail.php';
 require_once __DIR__ . '/../ValueObjects/UserPassword.php';
-
 require_once __DIR__ . '/../Enums/UserRoleEnum.php';
 require_once __DIR__ . '/../Enums/UserStatusEnum.php';
 
 
-class UserModel
+final class UserModel
 {
-    private $id;
-    private $name;
-    private $email;
-    private $password;
-    private $role;
-    private $status;
+    private UserId $id;
+    private UserName $name;
+    private UserEmail $email;
+    private UserPassword $password;
+    private string $role;
+    private string $status;
 
 
     public function __construct(
@@ -24,11 +25,11 @@ class UserModel
         UserName $name,
         UserEmail $email,
         UserPassword $password,
-        $role,
-        $status
+        string $role,
+        string $status
     ) {
 
-        UserRoleEnum::ensureValidValue($role);
+        UserRoleEnum::ensureIsValidValue($role);
         UserStatusEnum::ensureIsValid($status);
 
         $this-> id = $id;
@@ -41,60 +42,131 @@ class UserModel
     }
 
     public static function create(
-        UserId $id,
+        UserID $id,
         UserName $name,
         UserEmail $email,
         UserPassword $password,
-    ) {
+        string $role
+
+    ): self {
         $user = new self(
             $id,
             $name,
             $email,
             $password,
-            UserRoleEnum::MEMBER,
+            $role,
             UserStatusEnum::PENDING
         );
 
-        $user->recordEvent(new UserCreatedEvent($id->value()));
-
-        return $user;
     }
 
-    private function recordEvent(DomainEvent $event)
-    {
-        $this->event[] = $event;
-    }
-
-    public function pullEvents()
-    {
-        $event = $this->events;
-        $this->events = [];
-
-        return $event;
-    }
-
-    public function id()
+    public function id(): UserId
     {
         return $this->id;
     }
-    public function name()
+
+    public function name(): UserName
     {
         return $this->name;
     }
-    public function email()
+    public function email(): UserEmail
     {
         return $this->email;
     }
-    public function password()
+    public function password(): UserPassword
     {
         return $this->password;
     }
-    public function role()
+    public function role(): string
     {
         return $this->role;
     }
-    public function status()
+    public function status(): string
     {
         return $this->status;
     }
+
+    public function activate(): self
+    {
+        return new self(
+            $this->id,
+            $this->name,
+            $this->email,
+            $this->password,
+            $this->role,
+            UserStatusEnum::ACTIVE
+        );
+    }
+
+    public function deactivate(): self
+    {
+        return new self(
+            $this->id,
+            $this->name,
+            $this->email,
+            $this->password,
+            $this->role,
+            UserStatusEnum::INACTIVE
+        );
+    }
+
+    public function block(): self
+    {
+        return new self(
+            $this->id,
+            $name,
+            $this->email,
+            $this->password,
+            $this->role,
+            UserStatusEnum::BLOCKED
+        );
+    }
+
+    public function changeEmail(UserEmail $email): self
+    {
+        return new self(
+            $this->id,
+            $this->name,
+            $email,
+            $this->password,
+            $this->role,
+            $this->status
+        );
+    }
+
+    public function changePassword(UserPassword $password): self
+    {
+        return new self(
+            $this->id,
+            $this->name,
+            $this->email,
+            $password,
+            $this->role,
+            $this->status
+        );
+    }
+    public function changeRole(string $role): self
+    {
+        return new self(
+            $this->id,
+            $this->name,
+            $this->email,
+            $this->password,
+            $role,
+            $this->status
+        );
+    }
+
+    public function toArray(): array
+    {
+        return array(
+            'id' => $this->id->value(),
+            'name' => $this->name->value(),
+            'email' => $this->email->value(),
+            'password' => $this->password->value(),
+            'role' => $this->role,
+            'status' => $this->status
+        );
+    }
+
 }
