@@ -5,23 +5,22 @@ require_once __DIR__ . '/../Exceptions/InvalidUserPasswordException.php';
 class UserPassword
 {
     private $value;
-    private const MIN_LENGTH = 6;
-
+    
     public function __construct($value)
     {
-        if(empty($value)) {
+        $normalized = trim((string) $value);
+
+        if ($normalized === '') {
             throw InvalidUserPasswordException::becauseValueIsEmpty();
         }
-
-        if(strlen($value) < self::MIN_LENGTH) {
-            throw InvalidUserPasswordException::becauseValueIsTooShort(self::MIN_LENGTH);
+        if (strlen($normalized) < 8) {
+            throw InvalidUserPasswordException::becauseLengthIsTooShort();
         }
 
-        $this->value = $value;
+        $this->value = $normalized;
     }
-       
-    public function value()
-    {
-        return $this->value;
-    }
+
+    public function value() { return $this->value; }
+    public function equals(UserPassword $other) { return $this-> value === $other->value(); }
+    public function __toString() { return $this->value; }
 }

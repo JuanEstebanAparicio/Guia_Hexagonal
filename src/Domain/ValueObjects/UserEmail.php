@@ -8,19 +8,19 @@ class UserEmail
 
     public function __construct($value)
     {
-        if(empty($value)) {
-            throw InvalidUserEmailException::becauseValueIsInvalid();
-        }
+    $normalized = trim((string) $value);
 
-        if(!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            throw InvalidUserEmailException::becauseFormatIsInvalid();
-        }
-
-        $this->value = $value;
+    if ($normalized === '') {
+        throw InvalidUserEmailException::becauseValueIsEmpty();
     }
 
-    public function value()
-    {
-        return $this->value;
+    if(!filter_var($normalized, FILTER_VALIDATE_EMAIL)) {
+        throw InvalidUserEmailException::becauseFormatIsInvalid($normalized);
     }
+        $this->value = strtolower($normalized);
+    }
+
+    public function value() { return $this->value; }
+    public function equals(UserEmail $other) { return $this->value === $other->value();}
+    public function __toString() { return $this->value; }
 }
