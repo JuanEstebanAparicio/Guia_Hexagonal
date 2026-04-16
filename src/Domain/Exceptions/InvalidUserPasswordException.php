@@ -1,6 +1,6 @@
 <?php
 
-class  InvalidUserPasswordException extends InvalidArgumentException
+class InvalidUserPasswordException extends InvalidArgumentException
 {
     public static function becauseValueIsEmpty()
     {

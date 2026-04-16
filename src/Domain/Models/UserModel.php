@@ -8,7 +8,6 @@ require_once __DIR__ . '/../ValueObjects/UserPassword.php';
 require_once __DIR__ . '/../Enums/UserRoleEnum.php';
 require_once __DIR__ . '/../Enums/UserStatusEnum.php';
 
-require_once __DIR__ . '/../events/DomainEvent.php';
 
 class UserModel
 {
@@ -19,7 +18,6 @@ class UserModel
     private $role;
     private $status;
 
-    private $events = [];
 
     public function __construct(
         UserId $id,
