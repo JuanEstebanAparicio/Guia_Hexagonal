@@ -5,24 +5,24 @@ require_once __DIR__ . '/../Exceptions/InvalidUserNameException.php';
 class UserName
 {
     private $value;
-    private const MAX_LENGTH = 3;
-
+    
     public function __construct($value)
     {
-        if(empty($value)) {
+        $normalized = trim((string) $value);
+
+        if($normalized === ''){
             throw InvalidUserNameException::becauseValueIsEmpty();
         }
 
-        if(strlen($value) < self::MAX_LENGTH) {
-            throw InvalidUserNameException::becauseLengthIsTooShort(self::MIN_LENGTH);
+        if(mb_strlen($normalized) < 3){
+            throw InvalidUserNameException::becauseLengthIsTooShort(3);
         }
 
-        $this->value = $value;
+        $this->value = $normalized;
     }
 
-    public function value()
-    {
-        return $this->value;
-    }
+    public function value() { return this->value; }
+    public function equals(UserName $other) { return $this-> value === $other->value(); }
+    public function __toString() { return $this->value; }
 
 }
