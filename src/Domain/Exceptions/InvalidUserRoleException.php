@@ -1,6 +1,6 @@
 <?php
 
-class InvalidUserRolException extends InvalidArgumentException
+class InvalidUserRoleException extends InvalidArgumentException
 {
     public static function becauseValueIsInvalid($value)
     {

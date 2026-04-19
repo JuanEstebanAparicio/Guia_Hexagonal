@@ -1,6 +1,6 @@
 <?php
 
-class InvalidEmailException extends InvalidArgumentException
+class InvalidUserEmailException extends InvalidArgumentException
 {
     public static function becauseFormatIsInvalid($email)
     {

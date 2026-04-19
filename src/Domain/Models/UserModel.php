@@ -122,6 +122,18 @@ final class UserModel
         );
     }
 
+    public function chageName(UserName $name): self
+    {
+        return new self(
+            $this->id,
+            $name,
+            $this->email,
+            $this->password,
+            $this->role,
+            $this->status
+        );
+    }
+
     public function changeEmail(UserEmail $email): self
     {
         return new self(

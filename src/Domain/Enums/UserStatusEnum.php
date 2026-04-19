@@ -22,7 +22,7 @@ class UserStatusEnum
     public static function ensureIsValid($value)
     {
         if (!self::isValid($value)) {
-            throw InvalidUsersStatusException::becauseValueIsInvalid($value);
+            throw InvalidUserStatusException::becauseValueIsInvalid($value);
         }
     }
 }
