@@ -14,7 +14,7 @@ class UserPassword
             throw InvalidUserPasswordException::becauseValueIsEmpty();
         }
         if (strlen($normalized) < 8) {
-            throw InvalidUserPasswordException::becauseLengthIsTooShort();
+            throw InvalidUserPasswordException::becauseLengthIsTooShort(8);
         }
 
         $this->value = $normalized;

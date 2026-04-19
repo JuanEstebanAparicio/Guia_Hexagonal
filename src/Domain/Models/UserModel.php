@@ -29,7 +29,7 @@ final class UserModel
         string $status
     ) {
 
-        UserRoleEnum::ensureIsValidValue($role);
+        UserRoleEnum::ensureIsValid($role);
         UserStatusEnum::ensureIsValid($status);
 
         $this-> id = $id;
@@ -42,14 +42,14 @@ final class UserModel
     }
 
     public static function create(
-        UserID $id,
+        UserId $id,
         UserName $name,
         UserEmail $email,
         UserPassword $password,
         string $role
 
     ): self {
-        $user = new self(
+        return new self(
             $id,
             $name,
             $email,
@@ -114,7 +114,7 @@ final class UserModel
     {
         return new self(
             $this->id,
-            $name,
+            $this->name,
             $this->email,
             $this->password,
             $this->role,
