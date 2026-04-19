@@ -122,7 +122,7 @@ final class UserModel
         );
     }
 
-    public function chageName(UserName $name): self
+    public function changeName(UserName $name): self
     {
         return new self(
             $this->id,
