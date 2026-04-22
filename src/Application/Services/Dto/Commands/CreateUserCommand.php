@@ -9,7 +9,6 @@ final class CreateUserCommand
     private string $email;
     private string $password;
     private string $role;
-    private string $status;
 
 
 public function __construct(
@@ -18,14 +17,12 @@ public function __construct(
     string $email,
     string $password,
     string $role,
-    string $status
 ){
     $this->id           = trim($id);
     $this->name         = trim($name);
     $this->email        = trim($email);
     $this->password     = trim($password);
     $this->role         = trim($role);
-    $this->status       = trim($status);
 }
 
 public function getId():            string{ return $this->id; }
@@ -33,5 +30,4 @@ public function getName():          string{ return $this->name; }
 public function getEmail():         string{ return $this->email; }
 public function getPassword():      string{ return $this->password; }
 public function gerRole():          string{ return $this->role; }
-public function gerStatus():        string{ return $this->status; }
 }
