@@ -7,5 +7,5 @@ require_once __DIR__ . '/../../../Domain/ValueObjects/UserId.php';
 
 interface GetUserByIdPort
 {
-    public function getById(UserId $userId): ?userModel;
+    public function getById(UserId $userId): ?UserModel;
 }

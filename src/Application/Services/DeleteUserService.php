@@ -26,7 +26,7 @@ final class DeleteUserService implements DeleteUserUseCase
         $userId = UserApplicationMapper::fromDeleteCommandToUserId($command);
         $existingUser = $this->getUserByIdPort->getById($userId);
 
-        if ($existingUser == null) {
+        if ($existingUser === null) {
             throw UserNotFoundException::becauseIdWasNotFound($userId->value());
         }
 

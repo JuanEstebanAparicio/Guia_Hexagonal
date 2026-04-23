@@ -6,7 +6,7 @@ final class GetUserByIdQuery
 {
    private string $id;
    
-   public function __contruct(string $id)
+   public function __construct(string $id)
    {
     $this->id = trim($id);
    }

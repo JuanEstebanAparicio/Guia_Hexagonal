@@ -7,5 +7,5 @@ require_once __DIR__ . '/../../../Domain/Models/UserModel.php';
 
 interface GetUserByIdUseCase
 {
-    public function execute(GetUserByIdQuery $query): ?UserModel;
+    public function execute(GetUserByIdQuery $query): UserModel;
 }

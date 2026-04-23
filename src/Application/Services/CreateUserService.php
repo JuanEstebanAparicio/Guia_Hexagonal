@@ -12,7 +12,7 @@ require_once __DIR__ . '/Mappers/UserApplicationMapper.php';
 require_once __DIR__ . '/../../Domain/Exceptions/UserAlreadyExistsException.php';
 require_once __DIR__ . '/../../Domain/ValueObjects/UserEmail.php';
 
-final class CreateUserServices implements CreateUserUseCase
+final class CreateUserService implements CreateUserUseCase
 {
     private SaveUserPort $saveUserPort;
     private GetUserByEmailPort $getUserByEmailPort;

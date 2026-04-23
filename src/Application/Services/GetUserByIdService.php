@@ -18,7 +18,7 @@ final class GetUserByIdService implements GetUserByIdUseCase
 
     public function execute(GetUserByIdQuery $query): UserModel
     {
-        $userId = UserApplicationMapper::fromGetUserByIdQuryToUserId($query);
+        $userId = UserApplicationMapper::fromGetUserByIdQueryToUserId($query);
         $user = $this->getUserByIdPort->getById($userId);
 
         if ($user === null) {

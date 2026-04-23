@@ -27,7 +27,7 @@ final class UpdateUserService implements UpdateUserUseCase
         GetUserByIdPort $getUserByIdPort,
         GetUserByEmailPort $getUserByEmailPort 
     ){
-        $this->unpateUserPort = $updateUserPort;
+        $this->updateUserPort = $updateUserPort;
         $this->getUserByIdPort = $getUserByIdPort;
         $this->getUserByEmailPort = $getUserByEmailPort;
     }
@@ -42,15 +42,15 @@ final class UpdateUserService implements UpdateUserUseCase
         }
 
         $newEmail = new UserEmail($command->getEmail());
-        $UserWithSameEmail = $this->getUserByEmailPort->getByEmail($newEmail);
+        $userWithSameEmail = $this->getUserByEmailPort->getByEmail($newEmail);
 
         if($userWithSameEmail !== null && !$userWithSameEmail->id()->equals($userId)) {
             throw UserAlreadyExistsException::becauseEmailAlreadyExists($newEmail->value());
         }
 
         //If password is blank, keep the existing hashed password; otherwise, hash the new one.
-        $password = ($command->getUserPassword() === '')
-        ? UserPassword::fromPlainText($command->getUserPassword())
+        $password = ($command->getPassword() !== '')
+        ? UserPassword::fromPlainText($command->getPassword())
         : $currentUser->password();
 
         $userToUpdate = new UserModel(

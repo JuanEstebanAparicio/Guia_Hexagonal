@@ -16,7 +16,7 @@ public function __construct(
     string $name,
     string $email,
     string $password,
-    string $role,
+    string $role
 ){
     $this->id           = trim($id);
     $this->name         = trim($name);
@@ -29,5 +29,5 @@ public function getId():            string{ return $this->id; }
 public function getName():          string{ return $this->name; }
 public function getEmail():         string{ return $this->email; }
 public function getPassword():      string{ return $this->password; }
-public function gerRole():          string{ return $this->role; }
+public function getRole():          string{ return $this->role; }
 }

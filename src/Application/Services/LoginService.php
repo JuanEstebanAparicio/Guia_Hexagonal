@@ -7,10 +7,10 @@ require_once __DIR__ . '/Dto/Commands/LoginCommand.php';
 
 require_once __DIR__ . '/../../Domain/Models/UserModel.php';
 require_once __DIR__ . '/../../Domain/ValueObjects/UserEmail.php';
-require_once __DIR__ . '/../../Domain/ValueObjects/UserEmail.php';
+require_once __DIR__ . '/../../Domain/Enums/UserStatusEnum.php';
 require_once __DIR__ . '/../../Domain/Exceptions/InvalidCredentialsException.php';
 
-final class LoginServices implements LoginUseCase
+final class LoginService implements LoginUseCase
 {
     private GetUserByEmailPort $getUserByEmailPort;
 
@@ -22,7 +22,7 @@ final class LoginServices implements LoginUseCase
     public function execute(LoginCommand $command): UserModel
     {
         $email = new UserEmail($command->getEmail());
-        $user = $this->getUserByEmailPort->getUserByEmail($email);
+        $user = $this->getUserByEmailPort->getByEmail($email);
 
         if($user == null || !$user->password()->verifyPlain($command->getPassword())) {
             throw InvalidCredentialsException::becauseCredentialsAreInvalid();
@@ -30,7 +30,7 @@ final class LoginServices implements LoginUseCase
         }
 
         if ($user->status() !== UserStatusEnum::ACTIVE) {
-            throw InvalidCredentialsExeception::becauseUserIsNotACtive();
+            throw InvalidCredentialsException::becauseUserIsNotActive();
         }
 
         return $user;
