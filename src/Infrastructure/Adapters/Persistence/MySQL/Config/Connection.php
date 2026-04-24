@@ -29,7 +29,7 @@ final class Connection
 
     public function createPdo(): PDO
     {
-        $dns = sprintf(
+        $dsn = sprintf(
             'mysql:host=%s;port=%d;dbname=%s;charset=%s',
             $this->host,
             $this->port,
@@ -39,11 +39,11 @@ final class Connection
         );
 
         return new PDO(
-            $dns,
+            $dsn,
             $this->username,
             $this->password,
             array(
-                PD0::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
 

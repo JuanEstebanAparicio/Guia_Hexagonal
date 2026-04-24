@@ -74,7 +74,7 @@ final class UserPersistenceMapper
      * @param array<int, array<string, mixed>> $rows
      * @return UserModel[]
      */
-    public function formRowsToModels(array $rows): array
+    public function fromRowsToModels(array $rows): array
     {
         $models = array();
 

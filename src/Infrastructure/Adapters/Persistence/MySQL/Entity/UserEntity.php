@@ -10,8 +10,8 @@ final class UserEntity
     private string $password;
     private string $role;
     private string $status;
-    private string $createdAt;
-    private string $updatedAt;
+    private ?string $createdAt;
+    private ?string $updatedAt;
 
 
     public function __construct(
@@ -21,8 +21,8 @@ final class UserEntity
         string $password,
         string $role,
         string $status,
-        string $createdAt = null,
-        string $updatedAt = null
+        ?string $createdAt = null,
+        ?string $updatedAt = null
     ) {
         $this->id = trim($id);
         $this->name = trim($name);

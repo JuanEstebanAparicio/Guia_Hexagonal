@@ -33,7 +33,7 @@ final class UserRepositoryMySQL implements
 
         public function save(UserModel $user): UserModel
         {
-            $dto = $this->mapper->fromModelToDTO($user);
+            $dto = $this->mapper->fromModelToDto($user);
             
             $sql = '
                 INSERT INTO users (
@@ -102,9 +102,9 @@ final class UserRepositoryMySQL implements
                     ':status' => $dto->status()
                 ));
 
-                $updateUser = $this->getById(new UserId($dto->id()));
+                $updatedUser = $this->getById(new UserId($dto->id()));
 
-                if ($updateUser === null) {
+                if ($updatedUser === null) {
                     throw new RuntimeException('The user could not be recovered after update. ');
                 }
 
@@ -192,7 +192,7 @@ final class UserRepositoryMySQL implements
                 ORDER BY name ASC
             ';
 
-            $statement = $this->pdo->prepare($sql);
+            $statement = $this->pdo->query($sql);
             $rows = $statement->fetchAll();
 
             return $this->mapper->fromRowsToModels($rows);
