@@ -88,6 +88,10 @@ final class DependencyInjection
             self::getCreateUserUseCase(),
             self::getUpdateUserUseCase(),
             self::getGetUserByIdUseCase(),
+            self::getGetAllUsersUseCase(),
+            self::getDeleteUserUseCase(),
+            self::getUserWebMapper()
+
         );
     }
 }
