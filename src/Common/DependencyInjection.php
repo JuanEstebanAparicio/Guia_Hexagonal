@@ -12,7 +12,7 @@ final class DependencyInjection
 
     public static function getConnection(): Connection
     {
-        ClassLoader::LoadClass('Connection');
+        ClassLoader::loadClass('Connection');
         return new Connection(
             host: '127.0.0.1',
             port: 3306,
@@ -36,7 +36,7 @@ final class DependencyInjection
 
     public static function getUserRepository(): UserRepositoryMySQL
     {
-        classLoader::loadClass('UserRepositoryMySQL');
+        ClassLoader::loadClass('UserRepositoryMySQL');
         return new UserRepositoryMySQL(self::getPdo(), self::getUserPersistenceMapper());
 
     }
@@ -93,5 +93,12 @@ final class DependencyInjection
             self::getUserWebMapper()
 
         );
+    }
+
+  
+    public static function getLoginUseCase(): LoginUseCase
+    {
+    ClassLoader::loadClass('LoginService');
+    return new LoginService(self::getUserRepository());
     }
 }

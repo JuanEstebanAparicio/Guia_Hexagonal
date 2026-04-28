@@ -74,7 +74,7 @@ final class UserController
 
     public function delete(string $id): void
     {
-        $command = this->mapper->fromIdToDeleteCommand($id);
+        $command = $this->mapper->fromIdToDeleteCommand($id);
         $this->deleteUserUseCase->execute($command);
     }
 

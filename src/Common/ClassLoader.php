@@ -84,7 +84,7 @@ final class ClassLoader
 
     public static function loadClass(string $className): void
     {
-        if(!asset(self::$classMap[$className])) {
+        if(!isset(self::$classMap[$className])) {
             return;
         }
 

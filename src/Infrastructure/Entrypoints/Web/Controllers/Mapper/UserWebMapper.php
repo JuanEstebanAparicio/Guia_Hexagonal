@@ -49,7 +49,7 @@ final class UserWebMapper
         return new DeleteUserCommand($id);
     }
 
-    public function fromModelToResponse(UserMode $user): UserResponse
+    public function fromModelToResponse(UserModel $user): UserResponse
     {
         return new UserResponse(
             $user->id()->value(),
@@ -65,11 +65,11 @@ final class UserWebMapper
     * @return UserResponse[]
     */
 
-    public function formModelsToResponses(array $users): array
+    public function fromModelsToResponses(array $users): array
     {
-        $response = array();
+        $responses = array();
 
-        foreach ($Users as $user) {
+        foreach ($users as $user) {
             $responses[] = $this->fromModelToResponse($user);
         }
 
