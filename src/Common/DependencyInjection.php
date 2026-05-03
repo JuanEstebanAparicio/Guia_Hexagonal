@@ -14,11 +14,11 @@ final class DependencyInjection
     {
         ClassLoader::loadClass('Connection');
         return new Connection(
-            host: '127.0.0.1',
+            host: 'localhost',
             port: 3306,
             database: 'crud_usuarios',
             username: 'root',
-            password: 'root',
+            password: '',
             charset: 'utf8mb4'
         );
     }

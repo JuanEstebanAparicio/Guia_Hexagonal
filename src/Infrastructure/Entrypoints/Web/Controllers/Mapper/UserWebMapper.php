@@ -40,13 +40,13 @@ final class UserWebMapper
 
     public function fromIdToGetByIdQuery(string $id): GetUserByIdQuery
     {
-        return new GetUserByIdQuery($id);
+        return new GetUserByIdQuery((int) $id);
 
     }
     
     public function fromIdToDeleteCommand(string $id): DeleteUserCommand
     {
-        return new DeleteUserCommand($id);
+        return new DeleteUserCommand((int) $id);
     }
 
     public function fromModelToResponse(UserModel $user): UserResponse

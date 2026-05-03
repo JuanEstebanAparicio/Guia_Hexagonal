@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class UserPersistenceDto
 {
-    private string $id;
+    private int $id;
     private string $name;
     private string $email;
     private string $password;
@@ -13,14 +13,14 @@ final class UserPersistenceDto
 
 
     public function __construct(
-        string $id,
+        int $id,
         string $name,
         string $email,
         string $password,
         string $role,
         string $status
     ){
-        $this->id           = trim($id);
+        $this->id           = $id;
         $this->name         = trim($name);
         $this->email        = trim($email);
         $this->password     = trim($password);
@@ -28,7 +28,7 @@ final class UserPersistenceDto
         $this->status       = trim($status);
     }
 
-    public function id(): string            { return $this->id; }
+    public function id(): int            { return $this->id; }
     public function name(): string          { return $this->name; }
     public function email(): string         { return $this->email; }
     public function password(): string      { return $this->password; }

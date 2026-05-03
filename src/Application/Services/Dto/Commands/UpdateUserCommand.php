@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class UpdateUserCommand
 {
-    private string $id;
+    private int $id;
     private string $name;
     private string $email;
     private string $password;
@@ -12,14 +12,14 @@ final class UpdateUserCommand
     private string $status;
 
     public function __construct(
-     string $id,
+     int $id,
      string $name,
      string $email,
      string $password,
      string $role,
      string $status,
     ){
-        $this->id       = trim($id);
+        $this->id       = $id;
         $this->name     = trim($name);
         $this->email    = trim($email);
         $this->password = trim($password);
@@ -27,7 +27,7 @@ final class UpdateUserCommand
         $this->status   = trim($status);
     }
 
-    public function getId():        string { return $this->id; }
+    public function getId():        int { return $this->id; }
     public function getName():      string { return $this->name; }
     public function getEmail():     string { return $this->email; }
     public function getPassword():  string { return $this->password; }

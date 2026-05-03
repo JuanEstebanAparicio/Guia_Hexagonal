@@ -22,7 +22,7 @@ final class UserApplicationMapper
     public static function fromCreateCommandToModel(CreateUserCommand $command): UserModel
     {
         return new UserModel(
-            new UserId($command->getId()),
+            $command->getId() !== null ? new UserId($command->getId()) : null,
             new UserName($command->getName()),
             new UserEmail($command->getEmail()),
             UserPassword::fromPlainText($command->getPassword()),

@@ -37,7 +37,6 @@ final class UserRepositoryMySQL implements
             
             $sql = '
                 INSERT INTO users (
-                id,
                 name,
                 email,
                 password,
@@ -46,7 +45,6 @@ final class UserRepositoryMySQL implements
                 created_at,
                 updated_at
                 ) VALUES (
-                :id,
                 :name,
                 :email,
                 :password,
@@ -59,7 +57,6 @@ final class UserRepositoryMySQL implements
 
             $statement = $this->pdo->prepare($sql);
             $statement->execute(array(
-                ':id' => $dto->id(),
                 ':name' => $dto->name(),
                 ':email' => $dto->email(),
                 ':password' => $dto->password(),
@@ -68,7 +65,9 @@ final class UserRepositoryMySQL implements
                 
             ));
 
-            $savedUser = $this->getById(new UserId($dto->id()));
+            $id = (int) $this->pdo->lastInsertId();
+
+            $savedUser = $this->getById(new UserId($id));
 
             if($savedUser === null) {
                 throw new RuntimeException('The user could not be recovered after save.');

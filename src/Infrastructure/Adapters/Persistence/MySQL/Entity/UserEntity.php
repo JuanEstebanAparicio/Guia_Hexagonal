@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class UserEntity
 {
-    private string $id;
+    private int $id;
     private string $name;
     private string $email;
     private string $password;
@@ -15,7 +15,7 @@ final class UserEntity
 
 
     public function __construct(
-        string $id,
+        int $id,
         string $name,
         string $email,
         string $password,
@@ -24,7 +24,7 @@ final class UserEntity
         ?string $createdAt = null,
         ?string $updatedAt = null
     ) {
-        $this->id = trim($id);
+        $this->id = $id;
         $this->name = trim($name);
         $this->email = trim($email);
         $this->password = trim($password);
@@ -34,7 +34,7 @@ final class UserEntity
         $this->updatedAt = $updatedAt;
     }
 
-    public function id():           string { return $this->id; }
+    public function id():           int { return $this->id; }
     public function name():         string { return $this->name; }
     public function email():        string { return $this->email; }
     public function password():     string { return $this->password; }

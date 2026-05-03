@@ -20,6 +20,21 @@ class UserPassword
         $this->value = $normalized;
     }
 
+    public static function fromPlainText(string $plainPassword): self
+    {
+        return new self(password_hash($plainPassword, PASSWORD_DEFAULT));
+    }
+
+    public static function fromHash(string $hash): self
+    {
+        return new self($hash);
+    }
+
+    public function verifyPlain(string $plainPassword): bool
+    {
+        return password_verify($plainPassword, $this->value);
+    }
+
     public function value() { return $this->value; }
     public function equals(UserPassword $other) { return $this-> value === $other->value(); }
     public function __toString() { return $this->value; }

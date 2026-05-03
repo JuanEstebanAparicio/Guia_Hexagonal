@@ -40,7 +40,7 @@ final class UserPersistenceMapper
     public function fromRowToEntity(array $row): UserEntity
     {
         return new UserEntity(
-            (string) $row['id'],
+            (int) $row['id'],
             (string) $row['name'],
             (string) $row['email'],
             (string) $row['password'],

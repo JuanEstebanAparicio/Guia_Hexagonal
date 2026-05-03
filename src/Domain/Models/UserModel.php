@@ -12,7 +12,7 @@ require_once __DIR__ . '/../Enums/UserStatusEnum.php';
 
 final class UserModel
 {
-    private UserId $id;
+    private ?UserId $id;
     private UserName $name;
     private UserEmail $email;
     private UserPassword $password;
@@ -21,7 +21,7 @@ final class UserModel
 
 
     public function __construct(
-        UserId $id,
+        ?UserId $id,
         UserName $name,
         UserEmail $email,
         UserPassword $password,
@@ -42,7 +42,7 @@ final class UserModel
     }
 
     public static function create(
-        UserId $id,
+        ?UserId $id,
         UserName $name,
         UserEmail $email,
         UserPassword $password,
@@ -60,7 +60,7 @@ final class UserModel
 
     }
 
-    public function id(): UserId
+    public function id(): ?UserId
     {
         return $this->id;
     }

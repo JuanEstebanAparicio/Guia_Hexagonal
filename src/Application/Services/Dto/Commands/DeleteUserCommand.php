@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 final class DeleteUserCommand
 {
-    private string $id;
+    private int $id;
 
-    public function __construct(string $id)
+    public function __construct(int $id)
     {
-        $this->id = trim($id);
+        $this->id = $id;
     }
 
-    public function getId(): string{ return $this->id; }
+    public function getId(): int{ return $this->id; }
 }
