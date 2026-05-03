@@ -26,6 +26,12 @@ final class UserResponse
     public function getRole(): string { return $this->role; }
     public function getStatus(): string { return $this->status; }
 
+    public function id(): int { return $this->getId(); }
+    public function name(): string { return $this->getName(); }
+    public function email(): string { return $this->getEmail(); }
+    public function role(): string { return $this->getRole(); }
+    public function status(): string { return $this->getStatus(); }
+
     public function toArray(): array
     {
         return array(
@@ -36,4 +42,5 @@ final class UserResponse
             'status' => $this->status,
         );
     }
+
 }

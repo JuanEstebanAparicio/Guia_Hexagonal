@@ -15,8 +15,10 @@ final class UserPersistenceMapper
 {
     public function fromModelToDto(UserModel $user): UserPersistenceDto
     {
+        $id = $user->id() instanceof UserId ? $user->id()->value() : 0;
+
         return new UserPersistenceDto(
-            $user->id()->value(),
+            $id,
             $user->name()->value(),
             $user->email()->value(),
             $user->password()->value(),
@@ -32,6 +34,18 @@ final class UserPersistenceMapper
             $dto->name(),
             $dto->email(),
             $dto->password(),
+            $dto->role(),
+            $dto->status()
+        );
+    }
+
+    public function fromDtoToModel(UserPersistenceDto $dto): UserModel
+    {
+        return new UserModel(
+            new UserId($dto->id()),
+            new UserName($dto->name()),
+            new UserEmail($dto->email()),
+            UserPassword::fromHash($dto->password()),
             $dto->role(),
             $dto->status()
         );

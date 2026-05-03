@@ -14,8 +14,7 @@
 <?php endif; ?>
 
 <form method="POST" action="?route=users.update">
-    <input type="hidden" name="id" value="<?= htmlspecialchars($old['id'] ?? $user->getId(), ENT_QUOTES, 'UTF-8')
-?>">
+    <input type="hidden" name="id" value="<?= htmlspecialchars($old['id'] ?? $user->id(), ENT_QUOTES, 'UTF-8') ?>">
 
     <div class="form-group">
         <label for="name">Nombre</label><br>
@@ -23,7 +22,7 @@
             type="text"
             id="name"
             name="name"
-            value="<?= htmlspecialchars($old['name'] ?? $user->getName(), ENT_QUOTES, 'UTF-8') ?>"
+            value="<?= htmlspecialchars($old['name'] ?? $user->name(), ENT_QUOTES, 'UTF-8') ?>"
     >
 
     <?php if (!empty($errors['name'])): ?>
@@ -38,7 +37,7 @@
         type="email"
         id="email"
         name="email"
-        value="<?= htmlspecialchars($old['email'] ?? $user->getEmail(), ENT_QUOTES, 'UTF-8') ?>"
+        value="<?= htmlspecialchars($old['email'] ?? $user->email(), ENT_QUOTES, 'UTF-8') ?>"
     >
     <?php if (!empty($errors['email'])): ?>
         <div class="field-error"><?= htmlspecialchars($errors['email'], ENT_QUOTES, 'UTF-8') ?></div>
@@ -66,7 +65,7 @@
         <?php foreach ($roleOptions as $opt): ?>
             <option
                 value="<?= htmlspecialchars($opt, ENT_QUOTES, 'UTF-8') ?>"
-                <?= (($old['role'] ?? $user->getRole()) === $opt) ? 'selected' : '' ?>
+                <?= (($old['role'] ?? $user->role()) === $opt) ? 'selected' : '' ?>
             >
                 <?= htmlspecialchars($opt, ENT_QUOTES, 'UTF-8') ?>
             </option>
@@ -83,9 +82,8 @@
         <?php foreach ($statusOptions as $opt): ?>
             <option
                 value="<?= htmlspecialchars($opt, ENT_QUOTES, 'UTF-8') ?>"
-                <?= (($old['status'] ?? $user->getStatus()) === $opt) ? 'selected' : '' ?>
->
-
+                <?= (($old['status'] ?? $user->status()) === $opt) ? 'selected' : '' ?>
+            >
                 <?= htmlspecialchars($opt, ENT_QUOTES, 'UTF-8') ?>
             </option>
         <?php endforeach; ?>

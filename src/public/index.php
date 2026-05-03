@@ -91,7 +91,7 @@ try {
         case 'store':
             $controller = DependencyInjection::getUserController();
             $form = getCreateUserFormData();
-            $form['id'] = generateUuid4();
+            $form['id'] = null;
             $errors = validateCreateUserForm($form);
             if (!empty($errors)) {
                 Flash::setOld($form);
@@ -142,6 +142,7 @@ try {
         case 'update':
             $controller = DependencyInjection::getUserController();
             $form = getUpdateUserFormData();
+            $form['id'] = (int) $form['id'];
             $errors = validateUpdateUserForm($form);
             if (!empty($errors)) {
                 Flash::setOld($form);
@@ -473,6 +474,28 @@ function validateUpdateUserForm(array $form): array
     }
     if ($form['status'] === '') {
         $errors['status'] = 'El estado es obligatorio.';
+    }
+    return $errors;
+}
+
+function getLoginFormData(): array
+{
+    return array(
+        'email' => isset($_POST['email']) ? trim((string) $_POST['email']) : '',
+        'password' => isset($_POST['password']) ? trim((string) $_POST['password']) : '',
+    );
+}
+
+function validateLoginForm(array $form): array
+{
+    $errors = array();
+    if ($form['email'] === '') {
+        $errors['email'] = 'El correo es obligatorio.';
+    } elseif (!filter_var($form['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'El correo no tiene un formato válido.';
+    }
+    if ($form['password'] === '') {
+        $errors['password'] = 'La contraseña es obligatoria.';
     }
     return $errors;
 }

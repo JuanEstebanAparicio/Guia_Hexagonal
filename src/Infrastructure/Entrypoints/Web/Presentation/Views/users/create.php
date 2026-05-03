@@ -143,4 +143,4 @@
 
 </form>
 
-<?php require__DIR__ . '/../layouts/footer.php;'?>
+<?php require __DIR__ . '/../layouts/footer.php'; ?>
